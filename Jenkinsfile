@@ -1,4 +1,10 @@
 pipeline {
+   parameters {
+      string(name: 'releaseBranch', defaultValue: params.releaseBranch ?: 'develop', description: 'Consider the branch to deploy: develop, release/vX.Y.ZZ, etc.')
+   }
+   triggers{
+      pollSCM('* * * * *')
+   }
     agent {
         docker {
             image 'node:6-alpine'
